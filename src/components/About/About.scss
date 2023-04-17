@@ -1,0 +1,137 @@
+.aboutus {
+  margin-top: 100px;
+  background: #f6f6f6;
+  .container {
+    .about-info {
+      padding: 50px 0px;
+      h2 {
+        color: #000;
+        font-size: 40px;
+        text-align: center;
+      }
+
+      .about-area {
+        padding-top: 80px;
+        display: flex;
+        align-items: center;
+        gap: 50px;
+        .about-left {
+          flex: 1;
+          padding: 0px 10px;
+
+          img {
+            max-width: 100%;
+          }
+        }
+        .about-right {
+          flex: 1;
+          display: flex;
+          align-items: flex-start;
+          flex-direction: column;
+          padding: 0px 50px;
+
+          h3 {
+            font-size: 28px;
+            margin-bottom: 24px;
+            color: #000;
+          }
+
+          p {
+            font-size: 16px;
+            margin-bottom: 24px;
+            color: #808080;
+            line-height: 1.7;
+          }
+
+          ul {
+            list-style: none;
+            margin-bottom: 33px;
+
+            li {
+              display: flex;
+              align-items: center;
+              gap: 15px;
+              color: gray;
+              font-weight: 400;
+              font-size: 1rem;
+              margin-bottom: 15px;
+
+              .MuiSvgIcon-root {
+                color: #8bc34a;
+                font-size: 20px;
+              }
+            }
+          }
+
+          a {
+            border-width: 2px;
+            background: #4285f4;
+            color: #fff;
+            border: none;
+            position: relative;
+            top: 0;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 30px;
+            padding: 13px 30px;
+            transition: 0.3s all ease;
+            box-shadow: 0 4px 20px -5px rgba(66, 133, 244, 0.4);
+            cursor: pointer;
+
+            &:hover {
+              top: -2px;
+              box-shadow: 0 5px 30px -5px rgba(66, 133, 244, 0.7);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .aboutus {
+    .container {
+      .about-info {
+        .about-area {
+          flex-direction: column;
+
+          .about-right {
+            max-width: 100%;
+            padding: 0;
+
+            h3 {
+              br {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 567px) {
+  .aboutus {
+    .container {
+      .about-info {
+        h2 {
+            font-size: 32px;
+        }
+        .about-area {
+          flex-direction: column;
+
+          .about-right {
+            p {
+                font-size: 14px;
+            }
+            a {
+                padding: 10px 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Navbar.scss"
-import { NavLink } from 'react-router-dom'
+import { Link } from "react-scroll"
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
@@ -14,6 +14,18 @@ const Navbar = () => {
     const [navShow, setNavShow] = useState(false)
     const [navShowMore, setNavShowMore] = useState(false)
     const [menuOpen, setMenuOpen] = useState(false)
+    const [scrollY, setScrollY] = useState(0);
+
+    const [isLink, setIsLink] = useState("home");
+
+    useEffect(() => {
+        function handleScroll() {
+            setScrollY(window.scrollY);
+        }
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
     const props = useSpring({
         o: show ? 1 : 0,
         marginTop: show ? 0 : 20,
@@ -32,9 +44,10 @@ const Navbar = () => {
         setShow(false);
     };
 
-    const navHandle = () => {
-        setNavShow(!navShow)
-    }
+    const handleAboutClick = () => {
+        setNavShow(!navShow);
+        setNavShowMore(false);
+    };
 
     const navHandleClick = (e) => {
         setNavShowMore(!navShowMore)
@@ -54,7 +67,7 @@ const Navbar = () => {
     };
 
     return (
-        <div className='navbar' onMouseLeave={handleLeave}>
+        <div className={`navbar ${scrollY > 0 ? "navbar shadow" : ""}`} onMouseLeave={handleLeave}>
             <div className='container'>
                 <nav >
                     <div className='logo' >
@@ -62,76 +75,80 @@ const Navbar = () => {
                     </div>
                     <ul className='list'>
                         <li>
-                            <NavLink exact to="/" activeclassName="active-link">
+                            <Link to="home" spy={true} smooth={true} offset={-205} duration={800} onClick={() => { setIsLink("home") }}>
                                 Home
-                            </NavLink>
+                            </Link>
                         </li>
                         <li>
-                            <NavLink to="/features" activeclassName="active-link">
+                            <Link className={isLink === "features" ? "active" : ""} to="features" spy={true} smooth={true} offset={-120} duration={800} onClick={() => { setIsLink("features") }}>
                                 Features
-                            </NavLink>
+                            </Link>
                         </li>
                         <li>
-                            <NavLink
-                                to="/about"
-                                className="about"
-                                activeclassName="active-link"
+                            <Link
+                                to="aboutus"
                                 onMouseEnter={handleEnter}
+                                className={`about ${isLink === "about" ? "active" : ""}`}
+                                spy={true}
+                                smooth={true}
+                                offset={-120}
+                                duration={800}
+                                onClick={() => { setIsLink("about") }}
                             >
                                 About Us <KeyboardArrowDownIcon />
                                 {show &&
                                     <animated.ul style={props} onMouseLeave={moreLinksLeave} >
                                         <li>
-                                            <NavLink to="/templates" activeclassName="active-link">
+                                            <Link to="/templates" activeclassName="active-link">
                                                 More Free Templates
-                                            </NavLink>
+                                            </Link>
                                         </li>
                                         <li>
-                                            <NavLink to="/team" activeclassName="active-link">
+                                            <Link to="team" className={isLink === "team" ? "active" : ""} spy={true} smooth={true} offset={-70} duration={800} onClick={() => { setIsLink("team") }}>
                                                 Our Team
-                                            </NavLink>
+                                            </Link>
                                         </li>
                                         <li onMouseEnter={moreLinksEnter} >
-                                            <NavLink to="/morelinks" className="morelinks" activeclassName="active-link" >
+                                            <Link to="/morelinks" className="morelinks" activeclassName="active-link" >
                                                 More Links <KeyboardArrowRightIcon />
                                                 {showmore &&
                                                     <animated.ul style={propsTwo}>
                                                         <li>
-                                                            <NavLink to="/one" activeclassName="active-link">
+                                                            <Link to="/one" activeclassName="active-link">
                                                                 Menu One
-                                                            </NavLink>
+                                                            </Link>
                                                         </li>
                                                         <li>
-                                                            <NavLink to="/two" activeclassName="active-link">
+                                                            <Link to="/two" activeclassName="active-link">
                                                                 Menu Two
-                                                            </NavLink>
+                                                            </Link>
                                                         </li>
                                                         <li>
-                                                            <NavLink to="/three" activeclassName="active-link">
+                                                            <Link to="/three" activeclassName="active-link">
                                                                 Menu Three
-                                                            </NavLink>
+                                                            </Link>
                                                         </li>
                                                     </animated.ul>
                                                 }
-                                            </NavLink>
+                                            </Link>
                                         </li>
                                     </animated.ul>}
-                            </NavLink>
+                            </Link>
                         </li>
                         <li>
-                            <NavLink to="/testimonials" activeclassName="active-link">
+                            <Link to="testimonial" className={isLink === "testimonial" ? "active" : ""} spy={true} smooth={true} offset={-120} duration={800} onClick={() => { setIsLink("testimonial") }}>
                                 Testimonials
-                            </NavLink>
+                            </Link>
                         </li>
                         <li>
-                            <NavLink to="/blog" activeclassName="active-link">
+                            <Link to="blog" className={isLink === "blog" ? "active" : ""} spy={true} smooth={true} offset={-120} duration={800} onClick={() => { setIsLink("blog") }}>
                                 Blog
-                            </NavLink>
+                            </Link>
                         </li>
                         <li>
-                            <NavLink to="/contact" activeclassName="active-link">
+                            <Link to="contact" className={isLink === "contact" ? "active" : ""} spy={true} smooth={true} offset={-50} duration={800} onClick={() => { setIsLink("contact") }}>
                                 Contact
-                            </NavLink>
+                            </Link>
                         </li>
                     </ul>
                     <button className={`burger-menu ${menuOpen ? 'open' : ''}`} onClick={handleMenuClick}>
@@ -141,33 +158,41 @@ const Navbar = () => {
                     </button>
                     <ul className={`nav-list ${menuOpen ? 'open' : ''}`}>
                         <li>
-                            <NavLink exact to="/" activeclassName="active-link">
+                            <Link to="home" spy={true} smooth={true} offset={-205} duration={800} onClick={() => { setIsLink("home") }}>
                                 Home
-                            </NavLink>
+                            </Link>
                         </li>
                         <li>
-                            <NavLink to="/features" activeclassName="active-link">
+                            <Link className={isLink === "features" ? "active" : ""} to="features" spy={true} smooth={true} offset={-120} duration={800} onClick={() => { setIsLink("features") }}>
                                 Features
-                            </NavLink>
+                            </Link>
                         </li>
                         <li className="nav-about">
-                            <NavLink to="/about" activeClassName="active-link" onClick={navHandle}>
+                            <Link to="aboutus"
+                                onMouseEnter={handleEnter}
+                                onMouseLeave={handleLeave}
+                                onClick={handleAboutClick}
+                                spy={true}
+                                smooth={true}
+                                offset={-120}
+                                duration={800}
+                            >
                                 About Us{" "}
                                 {navShow ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                                 {navShow && (
                                     <ul>
                                         <li>
-                                            <NavLink to="/templates" activeClassName="active-link">
+                                            <Link to="/templates" activeClassName="active-link">
                                                 More Free Templates
-                                            </NavLink>
+                                            </Link>
                                         </li>
                                         <li>
-                                            <NavLink to="/team" activeClassName="active-link">
+                                            <Link to="team" className={isLink === "team" ? "active" : ""} spy={true} smooth={true} offset={-70} duration={800} onClick={() => { setIsLink("team") }}>
                                                 Our Team
-                                            </NavLink>
+                                            </Link>
                                         </li>
                                         <li className="morelinks">
-                                            <NavLink
+                                            <Link
                                                 to="/morelinks"
                                                 activeClassName="active-link"
                                                 onClick={navHandleClick}
@@ -177,42 +202,42 @@ const Navbar = () => {
                                                 {navShowMore && (
                                                     <ul onClick={(e) => e.stopPropagation()}>
                                                         <li>
-                                                            <NavLink to="/one" activeClassName="active-link">
+                                                            <Link to="/one" activeClassName="active-link">
                                                                 Menu One
-                                                            </NavLink>
+                                                            </Link>
                                                         </li>
                                                         <li>
-                                                            <NavLink to="/two" activeClassName="active-link">
+                                                            <Link to="/two" activeClassName="active-link">
                                                                 Menu Two
-                                                            </NavLink>
+                                                            </Link>
                                                         </li>
                                                         <li>
-                                                            <NavLink to="/three" activeClassName="active-link">
+                                                            <Link to="/three" activeClassName="active-link">
                                                                 Menu Three
-                                                            </NavLink>
+                                                            </Link>
                                                         </li>
                                                     </ul>
                                                 )}
-                                            </NavLink>
+                                            </Link>
                                         </li>
                                     </ul>
                                 )}
-                            </NavLink>
+                            </Link>
                         </li>
                         <li className={`${navShow ? 'nav-top' : ''} ${navShowMore ? 'nav-top-more' : ''} ${!navShow ? 'nav-hide' : ''}`}>
-                            <NavLink className="testimonials" to="/testimonials" activeclassName="active-link">
+                            <Link to="testimonial" className={`testimonials ${isLink === "testimonial" ? "active" : ""}`} spy={true} smooth={true} offset={-120} duration={800} onClick={() => { setIsLink("testimonial") }}>
                                 Testimonials
-                            </NavLink>
+                            </Link>
                         </li>
                         <li>
-                            <NavLink to="/blog" activeclassName="active-link">
+                            <Link to="blog" className={isLink === "blog" ? "active" : ""} spy={true} smooth={true} offset={-120} duration={800} onClick={() => { setIsLink("blog") }}>
                                 Blog
-                            </NavLink>
+                            </Link>
                         </li>
                         <li>
-                            <NavLink to="/contact" activeclassName="active-link">
+                            <Link to="contact" className={isLink === "contact" ? "active" : ""} spy={true} smooth={true} offset={-50} duration={800} onClick={() => { setIsLink("contact") }}>
                                 Contact
-                            </NavLink>
+                            </Link>
                         </li>
                     </ul>
 

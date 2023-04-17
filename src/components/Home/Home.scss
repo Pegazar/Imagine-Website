@@ -1,0 +1,129 @@
+.home {
+  margin-top: 100px;
+  .container {
+    .home-area {
+      display: flex;
+      align-items: center;
+
+      .home-left {
+        flex: 1;
+        h1 {
+          font-size: 3.5rem;
+          color: #000;
+          line-height: 65px;
+          margin-bottom: 8px;
+        }
+
+        p {
+          color: #6c757d;
+          font-size: 1rem;
+          font-weight: 300;
+          margin-bottom: 48px;
+        }
+
+        a {
+          border-width: 2px;
+          background: #4285f4;
+          color: #fff;
+          border: none;
+          position: relative;
+          top: 0;
+          text-decoration: none;
+          font-size: 16px;
+          border-radius: 30px;
+          padding: 13px 30px;
+          transition: 0.3s all ease;
+          box-shadow: 0 4px 20px -5px rgba(66, 133, 244, 0.4);
+          cursor: pointer;
+
+          &:hover {
+            top: -2px;
+            box-shadow: 0 5px 30px -5px rgba(66, 133, 244, 0.7);
+          }
+        }
+      }
+
+      .home-right {
+        flex: 1;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1127px) {
+  .home {
+    .container {
+      .home-area {
+        .home-left {
+          h1 {
+            font-size: 2.9rem;
+            line-height: 50px;
+          }
+
+          p {
+            font-size: 0.9rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 997px) {
+  .home {
+    .container {
+      .home-area {
+        flex-direction: column-reverse;
+        .home-left {
+          padding-top: 30px;
+          h1 {
+            font-size: 2.4rem;
+
+            br {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .home {
+    .container {
+      .home-area {
+        .home-left {
+          h1 {
+            font-size: 2rem;
+            line-height: 40px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .home {
+    .container {
+      .home-area {
+        .home-left {
+          h1 {
+            font-size: 1.8rem;
+            line-height: 35px;
+          }
+
+          a {
+            padding: 10px 20px;
+          }
+        }
+      }
+    }
+  }
+}

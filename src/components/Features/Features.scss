@@ -1,0 +1,163 @@
+.features {
+  margin-top: 135px;
+  .container {
+    .features-title {
+      text-align: center;
+      margin-bottom: 100px;
+
+      h2 {
+        font-size: 40px;
+        color: #000;
+        margin-bottom: 8px;
+      }
+
+      p {
+        font-size: 1.25rem;
+        font-weight: 300;
+        color: #808080;
+      }
+    }
+    .features-box {
+      width: 100%;
+      display: grid;
+      grid-template-columns: auto auto auto;
+      gap: 20px;
+
+      .box {
+        background: #f1f1f1;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin: 0px 15px;
+        border-radius: 5px;
+        padding: 50px 35px 30px;
+        position: relative;
+        top: 0;
+        transition: 0.3s all ease;
+        margin-bottom: 70px;
+
+        .img-box {
+          width: 80px;
+          height: 80px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: #4285f4;
+          border-radius: 50%;
+          margin-bottom: 16px;
+          position: absolute;
+          top: -45px;
+          box-shadow: 0 4px 20px -5px rgba(66, 133, 244, 0.4);
+
+          .MuiSvgIcon-root {
+            color: #fff;
+            font-size: 2rem;
+          }
+        }
+
+        h3 {
+          font-size: 18px;
+          font-weight: 400;
+          color: #000;
+          margin-bottom: 8px;
+        }
+
+        p {
+          font-weight: 300;
+          color: #808080;
+          margin-bottom: 16px;
+        }
+
+        a {
+          color: #007bff;
+          text-decoration: none;
+          background-color: transparent;
+        }
+
+        &:hover {
+          background: #4285f4;
+          top: -7px;
+        }
+
+        &:hover .img-box {
+          background: #fff;
+          box-shadow: 0 4px 20px -5px rgba(66, 133, 244, 0.4);
+        }
+
+        &:hover .img-box .MuiSvgIcon-root {
+          color: #4285f4;
+        }
+
+        &:hover h3,
+        &:hover a {
+          color: #fff;
+        }
+
+        &:hover p {
+          color: rgba(255, 255, 255, 0.7);
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1127px) {
+  .features {
+    .container {
+      .features-box {
+        grid-template-columns: auto auto;
+        justify-content: center;
+
+        .box {
+          width: 350px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .features {
+    .container {
+      .features-title {
+        h2 {
+          font-size: 36px;
+        }
+        p {
+          font-size: 1rem;
+        }
+      }
+      .features-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        .box {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 567px) {
+  .features {
+    .container {
+      .features-title {
+        h2 {
+          font-size: 32px;
+        }
+        p {
+          font-size: 0.9rem;
+
+          br {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
